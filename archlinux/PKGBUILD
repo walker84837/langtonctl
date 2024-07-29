@@ -1,0 +1,27 @@
+# Maintainer: walker84837 <walker84837@gmail.com>
+pkgname=langtonctl
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="A simulation of Langton's Ant"
+arch=('x86_64')
+url="https://github.com/walker84837/langtonctl"
+license=('GPL-3.0')
+depends=('raylib' 'gcc-libs')
+makedepends=('git' 'make' 'gcc')
+source=("git+https://github.com/walker84837/langtonctl.git")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/langtonctl"
+    git describe --tags | sed 's/^v//'
+}
+
+build() {
+    cd "$srcdir/langtonctl"
+    make
+}
+
+package() {
+    cd "$srcdir/langtonctl"
+    install -Dm755 langtonctl "$pkgdir/usr/bin/langtonctl"
+}
