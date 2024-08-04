@@ -1,7 +1,7 @@
-# Maintainer: Your Name <youremail@domain.com>
+# Maintainer: walker84837 <walker84837@gmail.com>
 
 pkgname=langtonctl
-pkgver=0.2.0  # Adjust this version as per the latest release or set it to a rolling release scheme.
+pkgver=0.2.0
 pkgrel=1
 pkgdesc="A command-line tool to simulate Langton's Ant cellular automaton."
 arch=('x86_64')
@@ -13,11 +13,6 @@ provides=("$pkgname")
 conflicts=()
 source=("$pkgname::git+$url.git")
 sha256sums=('SKIP')  # Skipping checksum verification for VCS sources
-
-pkgver() {
-  cd "$srcdir/$pkgname"
-  git describe --tags --long | sed 's/^v//;s/-/./g'
-}
 
 build() {
   cd "$srcdir/$pkgname"
