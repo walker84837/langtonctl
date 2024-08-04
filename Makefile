@@ -1,36 +1,28 @@
-# Define the compiler and the flags
-CC = gcc
-CFLAGS = -Wall -Wextra -pedantic -march=native -mtune=native -O2 -flto=auto
-LDFLAGS = -lraylib -lm
+# Variables
+SRC_DIR := src
+BIN_DIR := bin
+EXECUTABLE := $(BIN_DIR)/langtonctl
 
-# Define the target executable
-TARGET = langtonctl
-
-# Define the source files and object files
-SRCS = $(wildcard src/*.c)
-OBJS = $(SRCS:.c=.o)
+# Go source files
+SRC_FILES := $(wildcard $(SRC_DIR)/*.go)
 
 # Default target
-all: $(TARGET)
+all: build
 
-# Link object files to create the final executable
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+# Build target with optimization and stripping
+build: $(EXECUTABLE)
 
-# Compile source files into object files
-%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# Create bin directory and compile the Go files with optimizations and strip flags
+$(EXECUTABLE): $(SRC_FILES)
+	@mkdir -p $(BIN_DIR)
+	@go build -ldflags="-s -w" -buildmode=pie -trimpath -mod=readonly -o $(EXECUTABLE) $(SRC_FILES)
+	@strip $(EXECUTABLE)
+	@echo "Built $(EXECUTABLE) with optimizations"
 
-# Clean up build artifacts
+# Clean target
 clean:
-	rm -f $(OBJS) $(TARGET)
+	@rm -rf $(BIN_DIR)
+	@echo "Cleaned up."
 
-# Phony targets
-.PHONY: all clean
-
-# Display a message with the help
-help:
-	@echo "Usage:"
-	@echo "  make          - build the project"
-	@echo "  make clean    - remove build artifacts"
-	@echo "  make help     - display this help message"
+# PHONY targets to avoid conflicts with files of the same name
+.PHONY: all build clean

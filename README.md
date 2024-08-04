@@ -1,61 +1,67 @@
-# langtonctl
+# LangtonCtl
 
-LangtonCtl is a visual simulation of Langton's Ant, a classic example of a
-cellular automaton. In this simulation, an ant moves on a grid. The ant's
-behaviour creates patterns.
-
-Langton's Ant is an algorithm that creates complex behaviour from simple rules.
-You can see the simulation in a window, where you can also change the grid
-resolution and ant speed. For more information about Langton's Ant, check out
-[Langton's Ant on Wikipedia](https://en.wikipedia.org/wiki/Langton%27s_ant).
+LangtonCtl simulates [Langton's
+Ant](https://en.wikipedia.org/wiki/Langton%27s_ant), a cellular automaton. It
+shows an ant moving on a grid. Complex patterns form over time.
 
 ## Features
 
-  - Real-time simulation of Langton's Ant.
-  - Adjustable grid resolution and ant speed.
-  - Toggle pause with a mouse click.
-  - Simple and clean graphical output using Raylib.
+  - **Interactive Visualization**: Start and stop the simulation using the left
+    mouse button.
+  - **Customizable Speed**: Adjust the simulation speed using command-line
+    arguments.
+  - **Resizable Window**: Set the resolution of the simulation window using a
+    `WIDTHxHEIGHT` format.
 
 ## Installation
 
-To run this project, you'll need to have [Raylib](https://www.raylib.com/)
-installed. Follow these steps to get started:
+### Building from source
 
-1.  **Clone the repository:**
+**Requirements**:
+
+  - **Go**: LangtonCtl requires Go to be installed on your system. You can
+    download it from [Go's official website](https://golang.org/dl/).
+  - **Raylib-Go**: The project depends on the Raylib-Go library. You can install
+    it via Go modules.
+
+1.  Clone the repository:
     
     ``` bash
-    git clone https://github.com/walker84837/langtonctl.git
-    cd langtonctl
+    $ git clone https://github.com/walker84837/langtonctl.git
+    $ cd langtonctl
     ```
 
-2.  **Compile the project:**
-    
-    You can use the provided Makefile to compile the project. Run:
+2.  Build the project:
     
     ``` bash
-    make
+    $ make build
     ```
+
+3.  Run the simulation:
     
-    This will create an executable named `langtonctl`.
+    ``` bash
+    $ langtonctl -s 2.0 -r 1024x768
+    ```
+
+### Arch Linux
+
+There is a PKGBUILD at [archlinux/PKGBUILD](archlinux/PKGBUILD).
 
 ## Usage
 
-Run the executable with optional arguments to adjust the simulation parameters:
+LangtonCtl can be customized through the following command-line arguments:
 
-``` bash
-./langtonctl -s <speed> -r <resolution>
-```
-
-  - `-s <speed>`: Sets the speed of the simulation. The default is `1.0`.
-  - `-r <resolution>`: Sets the grid resolution in the format `WIDTHxHEIGHT`.
-    The default is `800x800`.
+  - **`-s` or `--speed`**: Set the speed of the simulation (e.g., `-s 2.0` for
+    double speed).
+  - **`-r` or `--resolution`**: Set the resolution of the simulation window
+    (e.g., `-r 1024x768`).
 
 ### Example
 
-To run the simulation with a speed of `2.0` and a resolution of `1024x768`, use:
+To run the simulation at double speed with a window resolution of 1024x768, use:
 
 ``` bash
-./langtonctl -s 2.0 -r 1024x768
+./bin/langtonctl -s 2.0 -r 1024x768
 ```
 
 ## Support
@@ -73,22 +79,25 @@ Future updates may include:
 
 ## Contributing
 
-Contributions are welcome! Please follow these steps to contribute:
+Contributions are welcome! Please fork the repository and submit a pull request.
+For major changes, please open an issue to discuss what you would like to
+change.
 
-1.  Fork the repository.
-2.  Create a new branch for your feature or bugfix.
-3.  Commit your changes and push to your fork.
-4.  Open a pull request to the main repository.
+### Getting Started
 
-Please ensure that your code adheres to the existing style and that you have
-tested your changes thoroughly.
+1.  Fork the repository and clone it locally.
+2.  Create a new branch for your changes.
+3.  Make your modifications and ensure the code is well-documented.
+4.  Test your changes thoroughly.
+5.  Submit a pull request with a clear description of the changes.
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the
-[LICENSE](LICENSE.md) file for details.
+This project is licensed under the [BSD 3-Clause](LICENSE.md) License file for
+details.
 
 ## Project Status
 
-The development of this project is ongoing. Contributions are encouraged, and we
-welcome feedback and suggestions for improvements.
+LangtonCtl is actively maintained. Future enhancements are planned, including
+support for additional cellular automaton rules and custom ant behavior
+configurations. Contributions and feedback are always welcome\!
